@@ -12,7 +12,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * main
+ * 获取B站动漫、电影等真实评分
  *
  * @author zzwtsy
  * @since 2023/01/04
