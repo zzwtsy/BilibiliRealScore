@@ -149,9 +149,7 @@ public class Main {
                         case 6 -> threeScoreTotal += 1;
                         case 8 -> fourScoreTotal += 1;
                         case 10 -> fiveScoreTotal += 1;
-                        case 0 -> {
-                            zeroScoreTotal += 1;
-                        }
+                        case 0 -> zeroScoreTotal += 1;
                         default -> {
                         }
                     }
