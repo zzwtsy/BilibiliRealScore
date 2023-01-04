@@ -19,6 +19,12 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Main {
     public static final Main INSTANCE = new Main();
+    public static int oneScoreTotal = 0;
+    public static int twoScoreTotal = 0;
+    public static int threeScoreTotal = 0;
+    public static int fourScoreTotal = 0;
+    public static int fiveScoreTotal = 0;
+    public static int zeroScoreTotal = 0;
 
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
@@ -46,11 +52,19 @@ public class Main {
         } else {
             date = (timeElapsed / 60) + "分钟";
         }
-        System.out.println("\n短评论个数:\t" + shortScore.size() + " 条"
+        System.out.print("\n短评论个数:\t" + shortScore.size() + " 条"
                 + "\n长评论个数:\t" + longScore.size() + " 条"
                 + "\n评分人数:\t" + String.format("%.0f 人", totalCount)
                 + "\n真实评分:\t" + String.format("%.1f 分", realScore)
-                + "\n耗时:\t\t" + date);
+                + "\n耗时:\t\t" + date
+                + "\n====================="
+                + "\n0分个数：" + zeroScoreTotal
+                + "\n1分个数：" + oneScoreTotal
+                + "\n2分个数：" + twoScoreTotal
+                + "\n3分个数：" + threeScoreTotal
+                + "\n4分个数：" + fourScoreTotal
+                + "\n5分个数：" + fiveScoreTotal
+        );
     }
 
     /**
@@ -126,8 +140,21 @@ public class Main {
                 //获取 json 文件中的 list 内容
                 JsonNode listContent = dataNode.get("list");
                 listContent.forEach(element -> {
+                    int tempScore = element.get("score").asInt();
                     //获取评分
-                    score.add(element.get("score").asInt());
+                    score.add(tempScore);
+                    switch (tempScore) {
+                        case 2 -> oneScoreTotal += 1;
+                        case 4 -> twoScoreTotal += 1;
+                        case 6 -> threeScoreTotal += 1;
+                        case 8 -> fourScoreTotal += 1;
+                        case 10 -> fiveScoreTotal += 1;
+                        case 0 -> {
+                            zeroScoreTotal += 1;
+                        }
+                        default -> {
+                        }
+                    }
                     System.out.println("正在获取" + element.get("author").get("uname") + "的评分");
                 });
                 next = dataNode.get("next").asLong();
