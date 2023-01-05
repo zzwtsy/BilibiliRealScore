@@ -1,5 +1,6 @@
 package cn.zzwtsy.score;
 
+import cn.zzwtsy.score.utils.ConsoleProgressBar;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,7 +10,6 @@ import okhttp3.Response;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 获取B站动漫、电影等真实评分
@@ -35,12 +35,16 @@ public class Main {
         List<Integer> shortScore = Main.INSTANCE.getShortScore(mid);
         //计算评分人数
         double totalCount = longScore.size() + shortScore.size();
-        AtomicInteger tempScore = new AtomicInteger();
+        long tempScore = 0;
         //计算评分
-        longScore.forEach(tempScore::addAndGet);
-        shortScore.forEach(tempScore::addAndGet);
+        for (Integer integer : longScore) {
+            tempScore += integer;
+        }
+        for (Integer integer : shortScore) {
+            tempScore += integer;
+        }
         //获取总评分
-        double totalScore = tempScore.get();
+        double totalScore = tempScore;
         //计算真实评分（总评分/总评分人数）
         double realScore = totalScore / totalCount;
         long end = System.currentTimeMillis();
@@ -52,7 +56,7 @@ public class Main {
         } else {
             date = (timeElapsed / 60) + "分钟";
         }
-        System.out.print("\n短评论个数:\t" + shortScore.size() + " 条"
+        System.out.println("\n短评论个数:\t" + shortScore.size() + " 条"
                 + "\n长评论个数:\t" + longScore.size() + " 条"
                 + "\n评分人数:\t" + String.format("%.0f 人", totalCount)
                 + "\n真实评分:\t" + String.format("%.1f 分", realScore)
@@ -99,6 +103,7 @@ public class Main {
         ObjectMapper objectMapper = new ObjectMapper();
         Response response = null;
         String responseBody;
+        long count = 0;
         int i = 0;
         long next = 0;
         for (; ; ) {
@@ -137,9 +142,18 @@ public class Main {
             try {
                 JsonNode jsonNode = objectMapper.readTree(responseBody);
                 JsonNode dataNode = jsonNode.get("data");
+                int total = dataNode.get("total").asInt();
+                String title;
+                if (scoreType) {
+                    title = "获取长评论进度";
+                } else {
+                    title = "获取短评论进度";
+                }
+                ConsoleProgressBar progress = new ConsoleProgressBar(0, total, 30, '█', title);
+                progress.show(count);
                 //获取 json 文件中的 list 内容
                 JsonNode listContent = dataNode.get("list");
-                listContent.forEach(element -> {
+                for (JsonNode element : listContent) {
                     int tempScore = element.get("score").asInt();
                     //获取评分
                     score.add(tempScore);
@@ -153,8 +167,8 @@ public class Main {
                         default -> {
                         }
                     }
-                    System.out.println("正在获取" + element.get("author").get("uname") + "的评分");
-                });
+                    count++;
+                }
                 next = dataNode.get("next").asLong();
                 if (next == (0)) {
                     return score;
