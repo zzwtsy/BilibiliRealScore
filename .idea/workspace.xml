@@ -9,10 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8094f1a2-5648-41c9-a55a-eddd47d501f8" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/zzwtsy/score/utils/ConsoleProgressBar.java" afterDir="false" />
+    <list default="true" id="8094f1a2-5648-41c9-a55a-eddd47d501f8" name="变更" comment="添加控制台打印进度">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/zzwtsy/score/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/zzwtsy/score/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/zzwtsy/score/utils/ConsoleProgressBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/zzwtsy/score/utils/ConsoleProgressBar.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,11 +120,25 @@
       <workItem from="1672868843296" duration="19000" />
       <workItem from="1672931528142" duration="4820000" />
       <workItem from="1672936794859" duration="253000" />
+      <workItem from="1672937245807" duration="285000" />
+      <workItem from="1672937610192" duration="393000" />
     </task>
+    <task id="LOCAL-00001" summary="添加控制台打印进度">
+      <created>1672937513872</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1672937513872</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="添加控制台打印进度" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加控制台打印进度" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

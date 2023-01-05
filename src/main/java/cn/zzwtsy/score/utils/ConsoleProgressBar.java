@@ -95,7 +95,7 @@ public class ConsoleProgressBar {
     }
 
     private void afterComplete() {
-        System.out.print('\n');
+        System.out.print("\n\n");
     }
 
     private String format(float num) {
