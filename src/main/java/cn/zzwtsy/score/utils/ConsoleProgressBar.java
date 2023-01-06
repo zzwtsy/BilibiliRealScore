@@ -74,9 +74,9 @@ public class ConsoleProgressBar {
         float rate = (float) (minimum * 1.0 / maximum);
         long len = (long) (rate * barLen);
         draw(len, rate);
-        if (minimum == maximum) {
-            afterComplete();
-        }
+        // if (minimum == maximum) {
+        //     afterComplete();
+        // }
     }
 
     private void draw(long len, float rate) {
@@ -91,12 +91,12 @@ public class ConsoleProgressBar {
 
     private void reset() {
         //光标移动到行首
-        System.out.print('\r');
+        System.out.print("\r");
     }
 
-    private void afterComplete() {
-        System.out.print("\n\n");
-    }
+    // private void afterComplete() {
+    //     System.out.print("\n");
+    // }
 
     private String format(float num) {
         return formatter.format(num);
